@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 using WebApp.ServiceExtensions;
 using Service;
+using Contracts;
+using WebApp.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
