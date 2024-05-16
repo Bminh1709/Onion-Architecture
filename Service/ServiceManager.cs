@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<ICompanyService> _companyService;
     private readonly Lazy<IEmployeeService> _employeeService;
     public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager
-    logger)
+    logger, IMapper mapper)
     {
-        _companyService = new Lazy<ICompanyService>(() => new CompanyService(repositoryManager, logger));
+        _companyService = new Lazy<ICompanyService>(() => new CompanyService(repositoryManager, logger, mapper));
         _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager, logger));
     }
     public ICompanyService CompanyService => _companyService.Value;
