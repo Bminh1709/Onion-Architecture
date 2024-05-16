@@ -17,7 +17,7 @@ public sealed class ServiceManager : IServiceManager
     logger, IMapper mapper)
     {
         _companyService = new Lazy<ICompanyService>(() => new CompanyService(repositoryManager, logger, mapper));
-        _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager, logger));
+        _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager, logger, mapper));
     }
     public ICompanyService CompanyService => _companyService.Value;
     public IEmployeeService EmployeeService => _employeeService.Value;
