@@ -9,8 +9,8 @@ using static Shared.DataTransferObjects;
 
 namespace Presentation.Controllers;
 
-[Route("api/companies/{companyId}/employees")]
 [ApiController]
+[Route("api/companies/{companyId}/employees")]
 public class EmployeesController : ControllerBase
 {
     private readonly IServiceManager _service;
@@ -40,5 +40,12 @@ public class EmployeesController : ControllerBase
         var employeeToReturn = _service.EmployeeService.CreateEmployeeForCompany(companyId, employee, false);
 
         return CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public IActionResult DeleteEmployeeForCompany(Guid companyId, Guid id)
+    {
+        _service.EmployeeService.DeleteEmployeeForCompany(companyId, id, trackChanges: false);
+        return NoContent();
     }
 }

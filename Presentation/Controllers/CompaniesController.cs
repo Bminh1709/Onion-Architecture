@@ -11,8 +11,8 @@ using static Shared.DataTransferObjects;
 
 namespace Presentation.Controllers;
 
-[ApiController]
 [Route("api/companies")]
+[ApiController]
 public class CompaniesController : ControllerBase
 {
     private readonly IServiceManager _service;
