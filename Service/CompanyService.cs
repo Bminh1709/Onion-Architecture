@@ -26,6 +26,18 @@ internal sealed class CompanyService : ICompanyService
 
     }
 
+    public CompanyDto CreateCompany(CompanyForCreationDto company)
+    {
+        var companyEntity = _mapper.Map<Company>(company);
+
+        _repository.Company.CreateCompany(companyEntity);
+        _repository.Save();
+
+        var companyDto = _mapper.Map<CompanyDto>(companyEntity);
+
+        return companyDto;
+    }
+
     public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
     {
         var companies = _repository.Company.GetAllCompanies(trackChanges);
